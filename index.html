@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/skeleton.css">
+    <link rel="stylesheet" href="css/custom.css">
+</head>
+<body>
+
+    <div id="contenido">
+        <div class="container">
+
+            <h1>Gym Progress</h1>
+            <form  id="formulario">
+                <div class="row">
+                    <div class="three columns">
+                        <label for="machine-number">Maquina</label>
+                        <input type="text" id="machine-number" name="machine-number" placeholder="Numero">
+                    </div>
+                    <div class="three columns">
+                        <label for="muscular-group">Grupo muscular</label>
+                        <input type="text" id="muscular-group" name="muscular-group" placeholder="Grupo muscular">
+                    </div>
+                    <div class="three columns">
+                        <label for="size">Talla</label>
+                        <select class="u-full-width" id="size">
+                            <option value="default">Seleccione un valor</option>
+                            <option value="small">S</option>
+                            <option value="medium">M</option>
+                            <option value="large">L</option>
+                        </select>
+                    </div>
+                    <div class="three columns">
+                        <label for="backplate">Banca</label>
+                        <input type="number" id="backplate" name="backplate" placeholder="Espaldar">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="three columns">
+                        <label for="range">Rango</label>
+                        <input type="number" id="range" name="range" placeholder="Rango">
+                    </div>
+
+                    <div class="three columns">
+                        <label for="weight">Peso</label>
+                        <input type="number" id="weight" name="weight" placeholder="Peso">
+                    </div>
+
+                    <div class="six columns">
+                        <label for="description">Descripcion</label>
+                        <textarea class="u-full-width" id="description" placeholder="Descripcion"> </textarea>
+                    </div>
+                    <input type="submit" class="button u-full-width button-primary" value="Agregar">
+                </div>
+            </form>
+            <div class="row">
+                <h2>Progress</h2>
+                <div id="progress-list"></div>
+
+                <table class="u-full-width">
+                    <thead>
+                        <tr>
+                            <th>Maquina</th>
+                            <th>Grupo muscular</th>
+                            <th>Talla</th>
+                            <th>Banca</th>
+                            <th>Rango</th>
+                            <th>Peso</th>
+                            <th>Descripcion</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Biceps</td>
+                            <td>S</td>
+                            <td>10</td>
+                            <td>10</td>
+                            <td>10</td>
+                            <td>Descripcion</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Triceps</td>
+                            <td>M</td>
+                            <td>10</td>
+                            <td>10</td>
+                            <td>10</td>
+                            <td>Descripcion</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div> <!--#contenido-->
+
+    <script src="js/app.js"></script>
+</body>
+</html>

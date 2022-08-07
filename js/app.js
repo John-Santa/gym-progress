@@ -2,6 +2,7 @@
 const form = document.querySelector('#formulario');
 const progressList = document.querySelector('#progress-list');
 let progress = {
+    id: Date.now(),
     machineNumber: '',
     muscularGroup: '',
     size: '',
@@ -11,6 +12,8 @@ let progress = {
     description: ''
 
 }
+
+let progressArray = [];
 
 //Event Listeners
 const eventListeners = () => {
@@ -40,7 +43,10 @@ const addProgress = (event) => {
     progress.weight = weight;
     progress.description = document.querySelector('#description').value;
 
-    console.log(progress);
+    progressArray = [...progressArray, progress];
+
+    //Show progress
+    showProgress();
 }
 
 const printError = (error) => {
@@ -52,6 +58,25 @@ const printError = (error) => {
         errorMessage.remove();
     } , 3000);
 }
+
+const showProgress = () => {
+    let html = '';
+    progressArray.forEach(progress => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+        <td>${progress.machineNumber}</td>
+        <td>${progress.muscularGroup}</td>
+        <td>${progress.size}</td>
+        <td>${progress.backplate}</td>
+        <td>${progress.range}</td>
+        <td>${progress.weight}</td>
+        <td>${progress.description}</td>
+        <td><button class="btn btn-danger btn-sm btn-delete" >Eliminar</button></td>
+    `;
+        progressList.appendChild(tr);
+    });
+}
+
 
 
 //Init

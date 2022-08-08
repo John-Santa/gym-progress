@@ -20,11 +20,8 @@ const eventListeners = () => {
     form.addEventListener('submit', addProgress);
     document.addEventListener('DOMContentLoaded', () => {
         progressArray = JSON.parse(localStorage.getItem('progress')) || [];
-        if (progressArray) {
-            showProgress();
-        }
+        showProgress();
     });
-    progressList.addEventListener('click', deleteProgress);
 }
 
 
@@ -67,10 +64,17 @@ const printError = (error) => {
 }
 
 const showProgress = () => {
-    let html = '';
+    cleanHTML();
     progressArray.forEach(progress => {
-        console.log(progress.id);
+        const btnDelete = document.createElement('button');
+        btnDelete.classList.add('borrar-progreso');
+        btnDelete.innerText = 'Eliminar';
         const tr = document.createElement('tr');
+
+        btnDelete.addEventListener('click', () => {
+            deleteProgress(progress);
+        });
+
         tr.innerHTML = `
         <td>${progress.machineNumber}</td>
         <td>${progress.muscularGroup}</td>
@@ -79,24 +83,27 @@ const showProgress = () => {
         <td>${progress.range}</td>
         <td>${progress.weight}</td>
         <td>${progress.description}</td>
-        <td><button class="btn btn-danger btn-sm btn-delete" >Eliminar</button></td>
     `;
+        tr.appendChild(btnDelete);
         progressList.appendChild(tr);
     });
 
     storageSincronized();
 }
 
+const cleanHTML = () => {
+    while (progressList.firstChild) {
+        progressList.removeChild(progressList.firstChild);
+    }
+}
+
 const storageSincronized = () => {
     localStorage.setItem('progress', JSON.stringify(progressArray));
 }
 
-const deleteProgress = (event) => {
-    if (event.target.classList.contains('btn-delete')) {+
-        event.target.parentElement.parentElement.remove();
-
-    }
-    console.log(progressArray);
+const deleteProgress = ({ id }) => {
+    progressArray = progressArray.filter(progress => progress.id !== id);
+    showProgress();
 }
 
 //Init

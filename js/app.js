@@ -18,6 +18,13 @@ let progressArray = [];
 //Event Listeners
 const eventListeners = () => {
     form.addEventListener('submit', addProgress);
+    document.addEventListener('DOMContentLoaded', () => {
+        progressArray = JSON.parse(localStorage.getItem('progress')) || [];
+        if (progressArray) {
+            showProgress();
+        }
+    });
+    progressList.addEventListener('click', deleteProgress);
 }
 
 
@@ -62,6 +69,7 @@ const printError = (error) => {
 const showProgress = () => {
     let html = '';
     progressArray.forEach(progress => {
+        console.log(progress.id);
         const tr = document.createElement('tr');
         tr.innerHTML = `
         <td>${progress.machineNumber}</td>
@@ -75,9 +83,21 @@ const showProgress = () => {
     `;
         progressList.appendChild(tr);
     });
+
+    storageSincronized();
 }
 
+const storageSincronized = () => {
+    localStorage.setItem('progress', JSON.stringify(progressArray));
+}
 
+const deleteProgress = (event) => {
+    if (event.target.classList.contains('btn-delete')) {+
+        event.target.parentElement.parentElement.remove();
+
+    }
+    console.log(progressArray);
+}
 
 //Init
 eventListeners();

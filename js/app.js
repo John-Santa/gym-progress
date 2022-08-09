@@ -1,7 +1,7 @@
 //Variables
-const form = document.querySelector('#formulario');
-const progressList = document.querySelector('#progress-list');
-let progress = {
+const form = document.querySelector('#form');
+const cards = document.querySelector('#progress-cards');
+let exercise = {
     id: Date.now(),
     machineNumber: '',
     muscularGroup: '',
@@ -13,21 +13,21 @@ let progress = {
 
 }
 
-let progressArray = [];
-
+let training = [];
 //Event Listeners
 const eventListeners = () => {
-    form.addEventListener('submit', addProgress);
+    form.addEventListener('submit', addExercise);
     document.addEventListener('DOMContentLoaded', () => {
-        progressArray = JSON.parse(localStorage.getItem('progress')) || [];
+        training = JSON.parse(localStorage.getItem('training')) || [];
         showProgress();
     });
 }
 
 
 //Functions
-const addProgress = (event) => {
+const addExercise = (event) => {
     event.preventDefault();
+
     //Get values
     const machineNumber = document.querySelector('#machine-number').value;
     const muscularGroup = document.querySelector('#muscular-group').value;
@@ -39,16 +39,17 @@ const addProgress = (event) => {
         return;
     }
 
-    progress.machineNumber = machineNumber;
-    progress.muscularGroup = muscularGroup;
-    progress.size = document.querySelector('#size').value;
-    progress.backplate = document.querySelector('#backplate').value;
-    progress.range = document.querySelector('#range').value;
-    progress.weight = weight;
-    progress.description = document.querySelector('#description').value;
+    exercise.machineNumber = machineNumber;
+    exercise.muscularGroup = muscularGroup;
+    exercise.size = document.querySelector('#size').value;
+    exercise.backplate = document.querySelector('#backplate').value;
+    exercise.range = document.querySelector('#range').value;
+    exercise.weight = weight;
+    exercise.description = document.querySelector('#description').value;
 
-    progressArray = [...progressArray, progress];
-
+    training = [...training, exercise];
+    //clean form
+    form.reset();
     //Show progress
     showProgress();
 }
@@ -63,48 +64,53 @@ const printError = (error) => {
     } , 3000);
 }
 
+
 const showProgress = () => {
     cleanHTML();
-    progressArray.forEach(progress => {
-        const btnDelete = document.createElement('button');
-        btnDelete.classList.add('borrar-progreso');
-        btnDelete.innerText = 'Eliminar';
-        const tr = document.createElement('tr');
+    training.forEach(exercise => {
 
+        const div = document.createElement('div');
+        div.classList.add('col-sm-4');
+        div.classList.add('spacing');
+
+        div.innerHTML = `
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">${exercise.machineNumber}-${exercise.muscularGroup}</h5>
+                    <p class="card-text">Size: ${exercise.size}</p>
+                    <p class="card-text">Backplate: ${exercise.backplate}</p>
+                    <p class="card-text">Range of motion: ${exercise.range}</p>
+                    <p class="card-text">Weight per series: ${exercise.weight}</p>
+                    <p class="card-text">Description: ${exercise.description}</p>
+                    <button class="btn btn-danger">Delete</button>
+                </div>
+            </div>
+        `;
+
+        const btnDelete = div.querySelector('button');
         btnDelete.addEventListener('click', () => {
-            deleteProgress(progress);
+            deleteProgress(exercise);
         });
-
-        tr.innerHTML = `
-        <td>${progress.machineNumber}</td>
-        <td>${progress.muscularGroup}</td>
-        <td>${progress.size}</td>
-        <td>${progress.backplate}</td>
-        <td>${progress.range}</td>
-        <td>${progress.weight}</td>
-        <td>${progress.description}</td>
-    `;
-        tr.appendChild(btnDelete);
-        progressList.appendChild(tr);
+        cards.appendChild(div);
     });
 
     storageSincronized();
 }
 
 const cleanHTML = () => {
-    while (progressList.firstChild) {
-        progressList.removeChild(progressList.firstChild);
+    while (cards.firstChild) {
+        cards.removeChild(cards.firstChild);
     }
 }
 
 const storageSincronized = () => {
-    localStorage.setItem('progress', JSON.stringify(progressArray));
+    localStorage.setItem('taining', JSON.stringify(training));
 }
+
 
 const deleteProgress = ({ id }) => {
-    progressArray = progressArray.filter(progress => progress.id !== id);
+    training = training.filter(progress => progress.id !== id);
     showProgress();
 }
-
 //Init
 eventListeners();

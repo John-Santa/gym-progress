@@ -1,17 +1,9 @@
-h1, h2 {
-    text-align: center;
+body {
+    background-color: #242F40;
 }
 
-#contenido {
-    margin-top: 40px;
-}
-.borrar-progreso,
-.borrar-progreso:hover {
-    margin-top: 4px;
-    float: right;
-    cursor: pointer;
-    color: red;
-    font-weight: bold;
+.spacing {
+    margin-bottom: 20px;
 }
 
 .error {
@@ -25,7 +17,14 @@ h1, h2 {
     color: white;
 }
 
-/*#machine-number {
-    text-align: left;
-    width: 8%;
-}*/
+.title {
+    background-color: #CC8500;
+    padding: 20px;
+    text-align: center;
+    color: white;
+}
+
+.btn-primary {
+    background-color: #CC8500;
+    border-color: #CC8500;
+}

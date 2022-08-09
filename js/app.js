@@ -1,5 +1,6 @@
 //Variables
 const form = document.querySelector('#form');
+const btnSubmit = document.querySelector('#submit');
 const cards = document.querySelector('#progress-cards');
 let exercise = {
     id: Date.now(),
@@ -17,9 +18,13 @@ let exercise = {
 let training = [];
 //Event Listeners
 const eventListeners = () => {
-    form.addEventListener('submit', addExercise);
+    submit.addEventListener('click', addExercise);
     document.addEventListener('DOMContentLoaded', () => {
-        training = JSON.parse(localStorage.getItem('training')) || [];
+        if (localStorage.getItem('taining')) {
+            training = JSON.parse(localStorage.getItem('taining'));
+        }else{
+            training = [];
+        }
         showProgress();
     });
 }
@@ -86,14 +91,21 @@ const showProgress = () => {
                     <p class="card-text">Weight per series: ${exercise.weight}</p>
                     <p class="card-text">Description: ${exercise.description}</p>
                     <button class="btn btn-danger">Delete</button>
-                </div>
+                    <button class="btn btn-warning">Edit</button>
             </div>
         `;
 
-        const btnDelete = div.querySelector('button');
+        const btnDelete = div.querySelector('.btn-danger');
         btnDelete.addEventListener('click', () => {
             deleteProgress(exercise);
         });
+
+        const btnEdit = div.querySelector('.btn-warning');
+        btnEdit.addEventListener('click', () => {
+            editProgress(exercise);
+        });
+
+
         cards.appendChild(div);
     });
 
@@ -110,10 +122,44 @@ const storageSincronized = () => {
     localStorage.setItem('taining', JSON.stringify(training));
 }
 
+const editProgress = ({ id }) => {
+    console.log(id);
+    const exercise = training.find(exercise => exercise.id === id);
+    form.querySelector('#exercise-name').value = exercise.name;
+    form.querySelector('#machine-number').value = exercise.machineNumber;
+    form.querySelector('#muscular-group').value = exercise.muscularGroup;
+    form.querySelector('#size').value = exercise.size;
+    form.querySelector('#backplate').value = exercise.backplate;
+    form.querySelector('#range').value = exercise.range;
+    form.querySelector('#weight').value = exercise.weight;
+    form.querySelector('#description').value = exercise.description;
+    form.querySelector('#update').removeAttribute('hidden');
+    form.querySelector('#submit').setAttribute('hidden', true);
+    form.querySelector('#update').addEventListener('click', () => {
+        updateProgress(exercise);
+    } );
+}
+
+const updateProgress = ({ id }) => {
+    const exercise = training.find(exercise => exercise.id === id);
+    exercise.name = document.querySelector('#exercise-name').value;
+    exercise.machineNumber = document.querySelector('#machine-number').value;
+    exercise.muscularGroup = document.querySelector('#muscular-group').value;
+    exercise.size = document.querySelector('#size').value;
+    exercise.backplate = document.querySelector('#backplate').value;
+    exercise.range = document.querySelector('#range').value;
+    exercise.weight = document.querySelector('#weight').value;
+    exercise.description = document.querySelector('#description').value;
+    form.querySelector('#submit').removeAttribute('hidden');
+    form.querySelector('#update').setAttribute('hidden', true);
+    showProgress();
+}
 
 const deleteProgress = ({ id }) => {
     training = training.filter(progress => progress.id !== id);
     showProgress();
 }
+
+
 //Init
 eventListeners();

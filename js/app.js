@@ -3,6 +3,7 @@ const form = document.querySelector('#form');
 const cards = document.querySelector('#progress-cards');
 let exercise = {
     id: Date.now(),
+    name: '',
     machineNumber: '',
     muscularGroup: '',
     size: '',
@@ -39,6 +40,7 @@ const addExercise = (event) => {
         return;
     }
 
+    exercise.name = document.querySelector('#exercise-name').value;
     exercise.machineNumber = machineNumber;
     exercise.muscularGroup = muscularGroup;
     exercise.size = document.querySelector('#size').value;
@@ -76,7 +78,8 @@ const showProgress = () => {
         div.innerHTML = `
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">${exercise.machineNumber}-${exercise.muscularGroup}</h5>
+                    <h5 class="card-title">${exercise.name}</h5>
+                    <p class="card-text">${exercise.machineNumber}-${exercise.muscularGroup}</p>
                     <p class="card-text">Size: ${exercise.size}</p>
                     <p class="card-text">Backplate: ${exercise.backplate}</p>
                     <p class="card-text">Range of motion: ${exercise.range}</p>

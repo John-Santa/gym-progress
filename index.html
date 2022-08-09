@@ -2,88 +2,72 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
     <title>GP</title>
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/skeleton.css">
-    <link rel="stylesheet" href="css/custom.css">
 </head>
 <body>
-
-    <div id="contenido">
-        <div class="container">
-
-            <h1>Gym Progress</h1>
-            <form  id="formulario">
-                <div class="row">
-                    <div class="three columns">
-                        <label for="machine-number">Maquina</label>
-                        <input type="text" id="machine-number" name="machine-number" placeholder="Numero">
-                    </div>
-                    <div class="three columns">
-                        <label for="muscular-group">Grupo muscular</label>
-                        <input type="text" id="muscular-group" name="muscular-group" placeholder="Grupo muscular">
-                    </div>
-                    <div class="three columns">
-                        <label for="size">Talla</label>
-                        <select class="" id="size">
-                            <option value="N/A">Seleccione un valor</option>
-                            <option value="S">S</option>
-                            <option value="M">M</option>
-                            <option value="L">L</option>
-                            <option value="L">XL</option>
-                        </select>
-                    </div>
-                    <div class="three columns">
-                        <label for="backplate">Banca</label>
-                        <input type="number" id="backplate" name="backplate" placeholder="Espaldar">
-                    </div>
+    <head class="container">
+        <h1 class="text-center">Gym Progress</h1>
+    </head>
+    <section class="container">
+        <article>
+            <form class="form">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="machine-number">
+                    <label for="machine-number">Machine Number</label>
                 </div>
-                <div class="row">
-                    <div class="three columns">
-                        <label for="range">Rango</label>
-                        <input type="number" id="range" name="range" placeholder="Rango">
-                    </div>
 
-                    <div class="three columns">
-                        <label for="weight">Peso</label>
-                        <input type="number" id="weight" name="weight" placeholder="Peso">
-                    </div>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="muscular-group">
+                    <label for="muscular-group">Muscular Group</label>
+                </div>
 
-                    <div class="six columns">
-                        <label for="description">Descripcion</label>
-                        <textarea class="u-full-width" id="description" placeholder="Descripcion"> </textarea>
-                    </div>
-                    <input type="submit" class="button u-full-width button-primary" value="Agregar">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="size">
+                    <label for="size">Size</label>
+                </div>
+
+                <select class="form-select form-select-lg mb-3" aria-label="Default select example">
+                    <option selected>Select your size</option>
+                    <option value="S">S</option>
+                    <option value="M">M</option>
+                    <option value="L">L</option>
+                    <option value="XL">XL</option>
+                </select>
+
+                <div class="form-floating mb-3">
+                    <input type="number" class="form-control" id="backplate">
+                    <label for="backplate">Backplate</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input type="number" class="form-control" id="range">
+                    <label for="range">Range</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input type="number" class="form-control" id="weight">
+                    <label for="weight">Weight</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <textarea class="form-control" id="description"> </textarea>
+                    <label for="description">Description</label>
+                </div>
+
+                <div class="d-grid gap-">
+                    <button type="submit" class="btn btn-primary mb-3">Add</button>
                 </div>
             </form>
-            <div class="row">
-                <h2>Progress</h2>
-                <div>
-                    <table class="u-full-width">
-                        <thead>
-                            <tr>
-                                <th>Maquina</th>
-                                <th>Grupo muscular</th>
-                                <th>Talla</th>
-                                <th>Banca</th>
-                                <th>Rango</th>
-                                <th>Peso</th>
-                                <th>Descripcion</th>
-                                <th>           </th>
-                            </tr>
-                        </thead>
-                        <tbody id="progress-list">
+        </article>
 
-                        </tbody>
-                    </table>
-                </div>
+        <article class="progress-cards">
 
-            </div>
-        </div>
-    </div> <!--#contenido-->
+        </article>
+    </section>
 
-    <script src="js/app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 </body>
 </html>
